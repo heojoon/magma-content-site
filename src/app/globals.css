@@ -1,26 +1,42 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "../styles/tokens.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-canvas: var(--brand-bg);
+  --color-card: var(--brand-bg-card);
+  --color-primary: var(--brand-primary);
+  --color-primary-dark: var(--brand-primary-dark);
+  --color-primary-light: var(--brand-primary-light);
+  --color-accent: var(--brand-accent);
+  --color-accent-dark: var(--brand-accent-dark);
+  --color-accent-light: var(--brand-accent-light);
+  --color-ink: var(--brand-text);
+  --color-ink-sub: var(--brand-text-sub);
+  --color-ink-muted: var(--brand-text-muted);
+  --color-line: var(--brand-border);
+  --color-line-dark: var(--brand-border-dark);
+  --radius-card: var(--brand-radius-card);
+  --radius-ui: var(--brand-radius-ui);
+  --font-sans: var(--font-inter), var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-noto-serif), ui-serif, serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-canvas text-ink font-sans antialiased;
 }
+
+/* 글 본문(remark-html 출력) 최소 스타일 — 의존성 최소 원칙으로 타이포그래피 플러그인 대신 직접 정의 */
+.post-body { @apply leading-relaxed text-[15px]; }
+.post-body h2 { @apply font-display text-xl font-bold mt-10 mb-3 text-primary; }
+.post-body h3 { @apply text-lg font-bold mt-8 mb-2; }
+.post-body p { @apply my-4; }
+.post-body ul { @apply my-4 pl-6 list-disc; }
+.post-body ol { @apply my-4 pl-6 list-decimal; }
+.post-body a { @apply text-primary underline underline-offset-2; }
+.post-body blockquote { @apply border-l-2 border-line-dark pl-4 text-ink-sub my-6; }
+.post-body code { @apply text-[13px] bg-card border border-line rounded px-1 py-0.5; }
+.post-body pre { @apply bg-card border border-line rounded-ui p-4 overflow-x-auto my-6; }
+.post-body pre code { @apply border-0 bg-transparent p-0; }
+.post-body img { @apply max-w-full rounded-ui my-6; }
+.post-body table { @apply w-full my-6 text-sm; }
+.post-body th, .post-body td { @apply border border-line px-3 py-2 text-left; }

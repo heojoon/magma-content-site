@@ -1,0 +1,25 @@
+/*
+ * MAGMA 브랜드 디자인 토큰 — DESIGN.md 의 구현체.
+ * 6.7 「디자인 마감」에서 여러분 회사의 DESIGN.md 를 만든 뒤 이 파일을 교체합니다.
+ * 값의 출처는 항상 DESIGN.md 가 우선입니다 (문서 먼저, 코드 다음).
+ */
+:root {
+  /* 컬러 */
+  --brand-primary: #0F595E;        /* 딥 틸 — 기둥색 */
+  --brand-primary-dark: #0D3F45;   /* 호버·짙은 면 */
+  --brand-primary-light: #2B7A82;  /* 보조 정보 */
+  --brand-accent: #C05621;         /* 테라코타 — 한 점 강조 (화면당 한두 점) */
+  --brand-accent-dark: #A03F1C;
+  --brand-accent-light: #E8754A;
+  --brand-bg: #F4F1EA;             /* 파치먼트 — 기본 캔버스 */
+  --brand-bg-card: #FAFAF8;        /* 카드·패널 표면 */
+  --brand-text: #1A202C;           /* 본문 잉크 */
+  --brand-text-sub: #4A5568;       /* 보조 텍스트·캡션 */
+  --brand-text-muted: #718096;     /* 장식 전용 — 본문 금지 */
+  --brand-border: #E2E8F0;
+  --brand-border-dark: #CBD5E0;
+
+  /* 모서리 (DESIGN.md: 8~12px) */
+  --brand-radius-card: 12px;
+  --brand-radius-ui: 8px;
+}
