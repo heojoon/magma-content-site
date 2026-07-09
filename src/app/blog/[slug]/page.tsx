@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPost, renderMarkdown } from "@/lib/posts";
+import { getAll, getOne, renderMarkdown } from "@/lib/content";
 
 // 새 글은 커밋 → 재배포로 반영되므로 목록 밖 slug 는 404 로 고정한다
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+  return getAll("posts").map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getOne("posts", slug);
   if (!post || post.draft) return {};
   return { title: post.title, description: post.description };
 }
@@ -22,7 +22,7 @@ export default async function PostPage(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getOne("posts", slug);
   if (!post || post.draft) notFound();
   const html = await renderMarkdown(post.content);
   return (

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import PostCard from "@/components/PostCard";
-import { getAllPosts } from "@/lib/posts";
+import { getAll } from "@/lib/content";
 
 export const metadata: Metadata = { title: "블로그" };
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAll("posts");
   return (
     <section className="py-14">
       <h1 className="mb-8 font-display text-2xl font-bold text-primary">블로그</h1>

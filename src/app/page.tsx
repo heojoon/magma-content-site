@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import PostCard from "@/components/PostCard";
-import { getAllPosts } from "@/lib/posts";
+import { getAll } from "@/lib/content";
 
 export default function Home() {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAll("posts").slice(0, 3);
   return (
     <>
       <Hero />
