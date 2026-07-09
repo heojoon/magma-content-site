@@ -1,19 +1,28 @@
 import { siteConfig } from "@config";
+import HeroMedia from "@/components/HeroMedia";
 import CtaSlot from "@/components/CtaSlot";
 
-/**
- * 6.7 「디자인 마감」에서 모션이 붙는 컴포넌트.
- * 구조를 바꾸지 않고 이 파일만 손대면 되도록 분리해 두었습니다.
- */
 export default function Hero() {
   return (
-    <section className="py-20">
-      <p className="mb-3 text-sm font-bold text-accent">{siteConfig.company.name} 콘텐츠 사업부</p>
-      <h1 className="font-display text-4xl font-bold leading-snug text-primary">
-        {siteConfig.company.tagline}
-      </h1>
-      <p className="mt-5 max-w-xl text-ink-sub">{siteConfig.company.description}</p>
-      <CtaSlot className="mt-8" />
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden">
+      <HeroMedia />
+      {/* 가독성 오버레이 */}
+      <div className="absolute inset-0 -z-10 bg-black/25" />
+      <div className="container-page py-24">
+        <p className="mb-4 text-sm font-bold tracking-[0.2em] text-accent-light">
+          {siteConfig.company.name}
+        </p>
+        <h1 className="max-w-3xl font-display text-4xl font-bold leading-tight text-card sm:text-6xl">
+          {siteConfig.company.tagline}
+        </h1>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-card/85">
+          {siteConfig.company.description}
+        </p>
+        <CtaSlot className="mt-10" />
+      </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-card/60">
+        SCROLL
+      </div>
     </section>
   );
 }
