@@ -23,7 +23,7 @@ MAGMA(3040 남성 패션 브랜드)의 회사소개 사이트. Next.js + Tailwin
 
 ## 지켜야 할 계약 (바꾸지 말 것)
 
-1. **frontmatter 필드명**: `title` `description` `date` `tags` `thumbnail` `draft` —
+1. **frontmatter 필드명**: `title` `description` `date` `tags` `thumbnail` `draft` `period`(reports 전용) —
    외부 도구(oh-my-wiki 내보내기·bluekiwi 발행 워크플로우)가 이 이름에 의존합니다.
 2. **slug**: 파일명 = slug, `^[a-z0-9]+(-[a-z0-9]+)*$` (한글·대문자·공백 금지).
 3. **발행 API 계약**: `POST /api/posts` · `collection: "posts"(기본)|"reports"` ·

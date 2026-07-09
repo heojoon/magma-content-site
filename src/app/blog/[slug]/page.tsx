@@ -29,8 +29,8 @@ export default async function PostPage(
       <header className="mb-12">
         <div className="flex items-center gap-3 text-xs text-ink-muted">
           <time>{post.date}</time>
-          {post.tags.map((t) => (
-            <span key={t} className="text-accent">{t}</span>
+          {post.tags.map((t, i) => (
+            <span key={`${t}-${i}`} className="text-accent">{t}</span>
           ))}
         </div>
         <h1 className="mt-3 font-display text-3xl font-bold leading-snug text-primary sm:text-4xl">{post.title}</h1>

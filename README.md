@@ -68,6 +68,7 @@ curl -X POST https://{내-배포-주소}/api/posts \
 | 응답 코드 | 의미 |
 | --- | --- |
 | 201 | 발행 성공 — `slug`·`url` 반환 |
+| 400 | collection 값이 posts·reports 가 아님 |
 | 401 | 인증 키 불일치 |
 | 409 | 같은 slug 의 글이 이미 있음 |
 | 422 | 필수 필드 누락·형식 오류 (`fields` 에 상세) |
