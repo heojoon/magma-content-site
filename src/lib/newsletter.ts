@@ -5,6 +5,26 @@ const invalidEmail = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export type SubscribeOutcome =
+  | { kind: 'subscribed' }
+  | { kind: 'alreadySubscribed' }
+  | { kind: 'unavailable' };
+
+export interface NewsletterProvider {
+  subscribe(email: string): Promise<SubscribeOutcome>;
+}
+
+export async function subscribeWithProvider(
+  provider: NewsletterProvider,
+  email: string,
+): Promise<SubscribeOutcome> {
+  try {
+    return await provider.subscribe(email);
+  } catch {
+    return { kind: 'unavailable' };
+  }
+}
+
 export function normalizeAndValidateEmail(value: unknown) {
   if (typeof value !== 'string') {
     return invalidEmail;
