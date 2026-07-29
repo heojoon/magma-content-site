@@ -43,3 +43,6 @@ next-env.d.ts
 
 # 배포 견본은 추적한다
 !.env.example
+
+# local newsletter subscriber data
+/data/newsletter-subscribers.json
