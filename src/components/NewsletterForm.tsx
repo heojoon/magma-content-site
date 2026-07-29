@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react';
 import { normalizeAndValidateEmail } from '@/lib/newsletter';
 
 const unavailableMessage = '현재 구독 요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.';
+const alreadySubscribedMessage = '이미 구독된 이메일입니다.';
 const successMessage = '구독해 주셔서 감사합니다.';
 
 type Status =
@@ -34,6 +35,19 @@ export default function NewsletterForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: validatedEmail.email }),
       });
+
+      if (response.status === 409) {
+        const responseBody: unknown = await response.json();
+        if (
+          typeof responseBody === 'object' &&
+          responseBody !== null &&
+          'kind' in responseBody &&
+          responseBody.kind === 'alreadySubscribed'
+        ) {
+          setStatus({ kind: 'error', message: alreadySubscribedMessage });
+          return;
+        }
+      }
 
       if (response.status !== 201) {
         setStatus({ kind: 'error', message: unavailableMessage });

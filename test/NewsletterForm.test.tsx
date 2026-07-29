@@ -70,6 +70,27 @@ describe('NewsletterForm', () => {
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('구독해 주셔서 감사합니다.'));
   });
 
+  it('retains the input and announces an already-subscribed message for a 409 response', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        status: 409,
+        json: vi.fn().mockResolvedValue({ kind: 'alreadySubscribed' }),
+      }),
+    );
+
+    render(<NewsletterForm />);
+
+    const emailInput = screen.getByLabelText('이메일 주소');
+    fireEvent.change(emailInput, { target: { value: 'hello@example.com' } });
+    fireEvent.submit(screen.getByRole('button', { name: '구독하기' }).closest('form')!);
+
+    await waitFor(() => {
+      expect(screen.getByRole('status').textContent).toBe('이미 구독된 이메일입니다.');
+    });
+    expect((emailInput as HTMLInputElement).value).toBe('hello@example.com');
+  });
+
   it('retains the input and announces an unavailable message after a failed request', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ status: 503 }));
 
