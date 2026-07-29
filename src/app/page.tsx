@@ -3,6 +3,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PostCard from "@/components/PostCard";
 import ReportCard from "@/components/ReportCard";
 import ImageSlot from "@/components/ImageSlot";
+import NewsletterSection from "@/components/NewsletterSection";
 import { siteConfig } from "@config";
 import { getAll } from "@/lib/content";
 
@@ -29,6 +30,8 @@ export default function Home() {
           <ImageSlot ratio="4/5" label="브랜드 비주얼" />
         </div>
       </section>
+
+      <NewsletterSection />
 
       {/* 최신 블로그 */}
       <section className="container-page py-16">
