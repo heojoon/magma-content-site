@@ -1,7 +1,23 @@
-import { describe, expect, it } from 'vitest';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { createSubscribeHandler } from '@/app/api/newsletter/subscribe/route';
 import type { NewsletterProvider } from '@/lib/newsletter';
+import { createJsonNewsletterProvider } from '@/lib/newsletter-store';
+
+const temporaryDirectories: string[] = [];
+
+async function createDataFilePath() {
+  const directory = await mkdtemp(join(tmpdir(), 'magma-newsletter-route-'));
+  temporaryDirectories.push(directory);
+  return join(directory, 'data', 'subscribers.json');
+}
+
+afterEach(async () => {
+  await Promise.all(temporaryDirectories.splice(0).map((directory) => rm(directory, { force: true, recursive: true })));
+});
 
 function request(body: string) {
   return new Request('http://localhost/api/newsletter/subscribe', {
@@ -53,6 +69,18 @@ describe('POST /api/newsletter/subscribe', () => {
       },
     };
     const handler = createSubscribeHandler(provider);
+
+    const response = await handler(request('{"email":"hello@example.com"}'));
+
+    expect(response.status).toBe(500);
+    await expect(response.json()).resolves.toEqual({ error: '서버 오류' });
+  });
+
+  it('returns a generic 500 error when the persisted subscriber file is malformed', async () => {
+    const dataFilePath = await createDataFilePath();
+    await mkdir(join(dataFilePath, '..'), { recursive: true });
+    await writeFile(dataFilePath, '{', 'utf8');
+    const handler = createSubscribeHandler(createJsonNewsletterProvider({ dataFilePath }));
 
     const response = await handler(request('{"email":"hello@example.com"}'));
 

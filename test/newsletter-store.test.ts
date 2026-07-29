@@ -60,6 +60,43 @@ describe('JSON newsletter provider', () => {
     expect(records[0].email).toBe('hello@example.com');
   });
 
+  it('serializes simultaneous subscriptions from separate providers sharing a data file', async () => {
+    const dataFilePath = await createDataFilePath();
+    const providers = [
+      createJsonNewsletterProvider({ dataFilePath }),
+      createJsonNewsletterProvider({ dataFilePath }),
+    ];
+
+    const outcomes = await Promise.all(
+      Array.from({ length: 8 }, (_, index) => providers[index % providers.length].subscribe('hello@example.com')),
+    );
+
+    expect(outcomes.filter((outcome) => outcome.kind === 'subscribed')).toHaveLength(1);
+    expect(outcomes.filter((outcome) => outcome.kind === 'alreadySubscribed')).toHaveLength(7);
+
+    const records = JSON.parse(await readFile(dataFilePath, 'utf8'));
+    expect(records).toHaveLength(1);
+    expect(records[0].email).toBe('hello@example.com');
+  });
+
+  it('rejects a subscription when the persisted file contains malformed JSON', async () => {
+    const dataFilePath = await createDataFilePath();
+    await mkdir(join(dataFilePath, '..'), { recursive: true });
+    await writeFile(dataFilePath, '{', 'utf8');
+    const provider = createJsonNewsletterProvider({ dataFilePath });
+
+    await expect(provider.subscribe('hello@example.com')).rejects.toThrow();
+  });
+
+  it('rejects a subscription when the persisted file contains an invalid record shape', async () => {
+    const dataFilePath = await createDataFilePath();
+    await mkdir(join(dataFilePath, '..'), { recursive: true });
+    await writeFile(dataFilePath, '[{"email":123,"subscribedAt":"2026-07-29T00:00:00.000Z"}]', 'utf8');
+    const provider = createJsonNewsletterProvider({ dataFilePath });
+
+    await expect(provider.subscribe('hello@example.com')).rejects.toThrow('Newsletter storage contains an invalid record');
+  });
+
   it('uses a data file outside the public directory by default', () => {
     expect(basename(defaultNewsletterDataFile)).toBe('newsletter-subscribers.json');
     expect(relative(process.cwd(), defaultNewsletterDataFile)).toBe('data/newsletter-subscribers.json');
