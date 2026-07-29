@@ -62,6 +62,7 @@ describe('NewsletterForm', () => {
 
     const button = screen.getByRole('button', { name: '구독 요청 중' });
     expect((button as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByLabelText('이메일 주소') as HTMLInputElement).disabled).toBe(true);
     expect(button.getAttribute('aria-busy')).toBe('true');
     expect(screen.getByRole('status').textContent).toBe('구독 요청 중');
 
@@ -71,6 +72,23 @@ describe('NewsletterForm', () => {
 
   it('retains the input and announces an unavailable message after a failed request', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ status: 503 }));
+
+    render(<NewsletterForm />);
+
+    const emailInput = screen.getByLabelText('이메일 주소');
+    fireEvent.change(emailInput, { target: { value: 'hello@example.com' } });
+    fireEvent.submit(screen.getByRole('button', { name: '구독하기' }).closest('form')!);
+
+    await waitFor(() => {
+      expect(screen.getByRole('status').textContent).toBe(
+        '현재 구독 요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.',
+      );
+    });
+    expect((emailInput as HTMLInputElement).value).toBe('hello@example.com');
+  });
+
+  it('retains the input and announces an unavailable message when the network request rejects', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network unavailable')));
 
     render(<NewsletterForm />);
 
