@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getAll, getOne, renderMarkdown } from "@/lib/content";
 
@@ -35,6 +36,16 @@ export default async function PostPage(
         </div>
         <h1 className="mt-3 font-display text-3xl font-bold leading-snug text-primary sm:text-4xl">{post.title}</h1>
         <p className="mt-4 text-lg text-ink-sub">{post.description}</p>
+        {post.thumbnail ? (
+          <Image
+            src={post.thumbnail}
+            alt=""
+            width={1536}
+            height={1024}
+            sizes="(min-width: 720px) 720px, 100vw"
+            className="mt-8 max-w-full rounded-ui"
+          />
+        ) : null}
       </header>
       <div className="post-body" dangerouslySetInnerHTML={{ __html: html }} />
     </article>
