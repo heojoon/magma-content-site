@@ -244,6 +244,18 @@
 - 추가 검증: `npm test` 8개 파일/37개 테스트 통과, `npm run build` 통과, `git diff --check` 통과.
 - 이번 후속 조치의 운영 API 호출: 미실행 — 운영 API 재호출·재시도 `0`회. Vercel CLI도 사용하지 않았습니다.
 
+## 운영 재배포 및 최종 검증
+
+- 배포 커밋: `2eaf960bdf875badb96dd8d9c3379e9cac9927ca` (`fix: render post thumbnails inside article`)를 `origin/main`에 push했습니다.
+- 배포 방식: Git push 기반 Vercel 자동 배포. Vercel CLI는 사용하지 않았습니다.
+- 최종 검증 시각: 2026-08-19T23:03:28+09:00
+- 운영 글 URL: `https://magma-content-site-six.vercel.app/blog/summer-resort-top5`
+- HTTP 검증: `200`, `server=Vercel`, `x-vercel-id=icn1::76rnk-1787148208230-c69e62a34598`, `x-vercel-cache=HIT`, HTML 길이 46,367 bytes.
+- 원고 렌더링 검증: article 본문 4,574자 및 “여행 가방은 적게, 장면은 충분하게” 문구 확인.
+- 이미지 렌더링 검증: Playwright Chromium 기준 article 내부 이미지 `6`개 모두 렌더링 확인. 썸네일은 `/_next/image?url=%2Fimages%2Fsummer-resort-top5-thumbnail.png&w=3840&q=75`, Look 01~05는 `/images/summer-resort-top5-look-01.png`~`05.png`로 확인됐고 모두 `complete=true`, 자연 크기 양수, 표시 상태였습니다.
+- 운영 API 재호출: 미실행 — 기존 2026-08-19T22:43:48+09:00 HTTP `201` 1회 외 추가 호출 `0`회.
+- 비밀값/API key/token/cookie 원문은 확인·기록·노출하지 않았습니다.
+
 ## 최종 상태
 
-`Fix verified on development site — production deployment pending`
+`Done — production rendering verified`
