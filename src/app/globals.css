@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "../styles/tokens.css";
 
 @theme inline {
   --color-canvas: var(--brand-bg);
