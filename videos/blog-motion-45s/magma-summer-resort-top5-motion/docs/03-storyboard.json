@@ -1,0 +1,17 @@
+{
+  "format": {"width": 1920, "height": 1080, "aspect_ratio": "16:9", "fps": 30, "duration_seconds": 45},
+  "concept": {"id": "A", "name": "여행의 선"},
+  "design_system": {"source": "BlueKiwi MAGMA Brand Design System", "id": 4, "version": "1.0.0", "canvas": "#141414", "foreground": "#F4F1EA", "body": "#EDEAE3", "accent": "#C05621"},
+  "safe_area": {"left_right_px": 120, "top_bottom_px": 90, "text_zone": "bottom_360px", "subject_protection": "central_55_percent"},
+  "transition": {"type": "css_dark_crossfade_with_route_line", "shader": false},
+  "music": {"source": "ACE-Step", "vocals": false, "beats": [{"time": 0, "event": "airy pads and distant piano"}, {"time": 5, "event": "steady bass and beat enter"}, {"time": 24, "event": "brief piano rise"}, {"time": 32, "event": "rhythm thins"}, {"time": 35, "event": "pads and piano release"}]},
+  "scenes": [
+    {"id": "intro", "start": 0, "end": 5, "asset": "/images/summer-resort-top5-thumbnail.png", "asset_treatment": "cover, 103_percent_slow_zoom", "copy": ["여름 휴양지, 다섯 장면", "옷은 더 적게. 장면은 충분하게."], "motion": "route line enters from left; title fade-up"},
+    {"id": "look01", "start": 5, "end": 11, "asset": "/images/summer-resort-top5-look-01.png", "asset_treatment": "portrait contain over dark blurred background", "copy": ["01 / 출발·장거리 이동", "오픈칼라 셔츠 · 이지 테이퍼드 팬츠"], "motion": "image rises 16px; route reaches first point"},
+    {"id": "look02", "start": 11, "end": 17, "asset": "/images/summer-resort-top5-look-02.png", "asset_treatment": "portrait contain over dark blurred background", "copy": ["02 / 늦은 아침·로컬 카페", "니트 폴로 · 스트레이트 팬츠"], "motion": "route glides to second point; crossfade"},
+    {"id": "look03", "start": 17, "end": 23, "asset": "/images/summer-resort-top5-look-03.png", "asset_treatment": "portrait contain over dark blurred background", "copy": ["03 / 해 질 무렵 산책", "가벼운 오버셔츠 · 롱 쇼츠"], "motion": "gentle route curve; staggered type entrance"},
+    {"id": "look04", "start": 23, "end": 29, "asset": "/images/summer-resort-top5-look-04.png", "asset_treatment": "portrait contain over dark blurred background", "copy": ["04 / 예약한 저녁 식사", "가벼운 셋업 · 간결한 이너"], "motion": "dark surface crossfade; restrained type entrance"},
+    {"id": "look05", "start": 29, "end": 35, "asset": "/images/summer-resort-top5-look-05.png", "asset_treatment": "portrait contain over dark blurred background", "copy": ["05 / 귀가·도시 복귀", "롱슬리브 셔츠 · 단정한 팬츠"], "motion": "102_percent slow zoom; route decelerates"},
+    {"id": "outro", "start": 35, "end": 45, "asset": ["/images/summer-resort-top5-thumbnail.png", "/images/summer-resort-top5-look-01.png", "/images/summer-resort-top5-look-02.png", "/images/summer-resort-top5-look-03.png", "/images/summer-resort-top5-look-04.png", "/images/summer-resort-top5-look-05.png"], "asset_treatment": "five portrait strips plus thumbnail, no logo", "copy": ["여행지에서도, 쓰임이 먼저.", "MAGMA editorial"], "motion": "strips gather; route fades out over final 0.8 seconds"}
+  ]
+}

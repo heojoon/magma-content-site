@@ -42,6 +42,7 @@ export default async function PostPage(
             alt=""
             width={1536}
             height={1024}
+            unoptimized
             sizes="(min-width: 720px) 720px, 100vw"
             className="mt-8 max-w-full rounded-ui"
           />

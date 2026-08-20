@@ -259,3 +259,19 @@
 ## 최종 상태
 
 `Done — production rendering verified`
+
+## 부모 운영 발행 작업 최종 확인 — t_05790e52
+
+- 확인 시각: 2026-08-19T23:05:24+09:00
+- 저장소 확인: 작업 폴더 `/home/user/.hermes/workspace/magma-content-site`, branch `main`, remote `origin=https://github.com/heojoon/magma-content-site.git`, 최신 로컬 커밋 `9bc0c95 docs: record production render verification`.
+- `origin/main` 확인: `git ls-remote origin refs/heads/main` 결과 `9bc0c9518e5af358b947b70f284f2db46e941740`.
+- 운영 API 호출: 이번 부모 확인 작업에서는 미실행 — 기존 2026-08-19T22:43:48+09:00 HTTP `201` 1회 외 추가 호출 `0`회. Vercel CLI도 사용하지 않았습니다.
+- 운영 글 URL: `https://magma-content-site-six.vercel.app/blog/summer-resort-top5`
+- 최종 운영 검증: `REVIEW_ORIGIN=https://magma-content-site-six.vercel.app node scripts/verify-summer-resort-published.mjs` 통과. HTTP `200`, article 본문 4,574자, 필수 문구 확인, article 이미지 `6`개 모두 `complete=true`, 자연 크기 양수, 표시 상태.
+- 범위 확인: README 지정 이미지 6장과 운영 렌더링 상태만 확인했습니다. 최종 원고·README·검토 HTML·기타 미추적 파일을 운영 API로 재발행하지 않았고, 작업 폴더의 기존 미추적/수정 파일은 커밋·푸시하지 않았습니다.
+- 비밀값/API key/token/cookie 원문은 확인·기록·노출하지 않았습니다.
+- 정적 확인: `git diff --check` 통과.
+
+## 최종 상태
+
+`Done — t_05790e52 production publish/rendering verified`

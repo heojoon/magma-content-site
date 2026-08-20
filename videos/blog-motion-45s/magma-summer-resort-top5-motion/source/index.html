@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:"Noto Serif KR"; src:local("Noto Serif KR"); }
+      @font-face { font-family:"Noto Sans KR"; src:local("Noto Sans KR"); }
+      :root { --canvas:#141414; --paper:#F4F1EA; --ink:#EDEAE3; --sub:#B0AAA0; --accent:#C05621; --border:#2E2A26; }
+      * { box-sizing:border-box; margin:0; padding:0; }
+      html, body { width:1920px; height:1080px; overflow:hidden; background:var(--canvas); }
+      body { font-family:"Noto Sans KR", Inter, system-ui, sans-serif; color:var(--ink); }
+      #stage { width:1920px; height:1080px; position:relative; overflow:hidden; background:var(--canvas); }
+      .scene { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; background:var(--canvas); }
+      .scene-content { width:100%; height:100%; padding:90px 120px; display:flex; flex-direction:column; justify-content:space-between; position:relative; z-index:3; }
+      .photo-bg { position:absolute; inset:-30px; width:calc(100% + 60px); height:calc(100% + 60px); object-fit:cover; filter:blur(24px) brightness(.34) saturate(.72); transform:scale(1.08); }
+      .photo-wash { position:absolute; inset:0; background:rgba(20,20,20,.54); z-index:1; }
+      .hero-image { position:absolute; inset:90px 360px 150px; width:1200px; height:840px; object-fit:contain; z-index:2; }
+      .route { position:absolute; left:120px; right:120px; bottom:116px; height:2px; background:var(--border); z-index:5; transform-origin:left center; }
+      .route::after { content:""; position:absolute; left:0; top:-5px; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 8px rgba(192,86,33,.15); }
+      .kicker { color:var(--accent); font-size:24px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+      .title { max-width:1160px; font-family:"Noto Serif KR", Georgia, serif; color:var(--paper); font-size:86px; line-height:1.15; letter-spacing:.09em; font-weight:700; }
+      .lede { max-width:760px; color:var(--sub); font-size:30px; line-height:1.55; }
+      .caption-box { width:100%; display:flex; justify-content:space-between; align-items:end; gap:40px; padding-bottom:58px; }
+      .look-title { font-family:"Noto Serif KR", Georgia, serif; color:var(--paper); font-size:50px; font-weight:700; letter-spacing:.08em; }
+      .look-copy { max-width:760px; color:var(--ink); font-size:26px; line-height:1.45; text-align:right; }
+      .outro-grid { position:absolute; inset:176px 120px 190px; display:grid; grid-template-columns:repeat(6,1fr); gap:16px; z-index:2; }
+      .outro-grid img { width:100%; height:100%; object-fit:cover; filter:brightness(.74) saturate(.75); }
+      .outro-overlay { position:absolute; inset:0; z-index:3; background:rgba(20,20,20,.4); }
+      .outro-copy { position:relative; z-index:4; max-width:1120px; padding-top:112px; }
+      .outro-copy .title { font-size:76px; }
+      .outro-copy .lede { margin-top:26px; }
+      .quiet { opacity:0; }
+    </style>
+  </head>
+  <body>
+    <div id="stage" data-composition-id="magma-resort" data-start="0" data-duration="45" data-width="1920" data-height="1080">
+      <audio id="bgm" data-start="0" data-duration="45" data-track-index="0" data-volume="0.48" src="assets/bgm.mp3"></audio>
+
+      <section id="intro" class="scene clip" data-start="0" data-duration="5" data-track-index="1">
+        <img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-thumbnail.png" alt="" />
+        <div class="photo-wash"></div><img id="intro-photo" class="hero-image" src="assets/summer-resort-top5-thumbnail.png" alt="" />
+        <div class="scene-content"><div><p id="intro-kicker" class="kicker">MAGMA EDITORIAL / SUMMER 2026</p><h1 id="intro-title" class="title">여름 휴양지,<br>다섯 장면</h1></div><div class="caption-box"><p id="intro-lede" class="lede">옷은 더 적게. 장면은 충분하게.</p></div></div><div id="route-intro" class="route"></div>
+      </section>
+
+      <section id="look01" class="scene clip" data-start="5" data-duration="6" data-track-index="1"><img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-look-01.png" alt="" /><div class="photo-wash"></div><img id="look01-photo" class="hero-image" src="assets/summer-resort-top5-look-01.png" alt="" /><div class="scene-content"><p id="look01-kicker" class="kicker">01 / 출발·장거리 이동</p><div class="caption-box"><h2 id="look01-title" class="look-title">여행의 첫 장면</h2><p id="look01-copy" class="look-copy">오픈칼라 셔츠 · 이지 테이퍼드 팬츠</p></div></div><div id="route-01" class="route"></div></section>
+      <section id="look02" class="scene clip" data-start="11" data-duration="6" data-track-index="1"><img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-look-02.png" alt="" /><div class="photo-wash"></div><img id="look02-photo" class="hero-image" src="assets/summer-resort-top5-look-02.png" alt="" /><div class="scene-content"><p id="look02-kicker" class="kicker">02 / 늦은 아침·로컬 카페</p><div class="caption-box"><h2 id="look02-title" class="look-title">낮의 단정함</h2><p id="look02-copy" class="look-copy">니트 폴로 · 스트레이트 팬츠</p></div></div><div id="route-02" class="route"></div></section>
+      <section id="look03" class="scene clip" data-start="17" data-duration="6" data-track-index="1"><img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-look-03.png" alt="" /><div class="photo-wash"></div><img id="look03-photo" class="hero-image" src="assets/summer-resort-top5-look-03.png" alt="" /><div class="scene-content"><p id="look03-kicker" class="kicker">03 / 해 질 무렵 산책</p><div class="caption-box"><h2 id="look03-title" class="look-title">한 겹의 여유</h2><p id="look03-copy" class="look-copy">가벼운 오버셔츠 · 롱 쇼츠</p></div></div><div id="route-03" class="route"></div></section>
+      <section id="look04" class="scene clip" data-start="23" data-duration="6" data-track-index="1"><img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-look-04.png" alt="" /><div class="photo-wash"></div><img id="look04-photo" class="hero-image" src="assets/summer-resort-top5-look-04.png" alt="" /><div class="scene-content"><p id="look04-kicker" class="kicker">04 / 예약한 저녁 식사</p><div class="caption-box"><h2 id="look04-title" class="look-title">선이 남는 저녁</h2><p id="look04-copy" class="look-copy">가벼운 셋업 · 간결한 이너</p></div></div><div id="route-04" class="route"></div></section>
+      <section id="look05" class="scene clip" data-start="29" data-duration="6" data-track-index="1"><img class="photo-bg" data-layout-allow-overflow src="assets/summer-resort-top5-look-05.png" alt="" /><div class="photo-wash"></div><img id="look05-photo" class="hero-image" src="assets/summer-resort-top5-look-05.png" alt="" /><div class="scene-content"><p id="look05-kicker" class="kicker">05 / 귀가·도시 복귀</p><div class="caption-box"><h2 id="look05-title" class="look-title">다시, 일상으로</h2><p id="look05-copy" class="look-copy">롱슬리브 셔츠 · 단정한 팬츠</p></div></div><div id="route-05" class="route"></div></section>
+
+      <section id="outro" class="scene clip" data-start="35" data-duration="10" data-track-index="1"><div class="outro-grid"><img src="assets/summer-resort-top5-thumbnail.png" alt=""/><img src="assets/summer-resort-top5-look-01.png" alt=""/><img src="assets/summer-resort-top5-look-02.png" alt=""/><img src="assets/summer-resort-top5-look-03.png" alt=""/><img src="assets/summer-resort-top5-look-04.png" alt=""/><img src="assets/summer-resort-top5-look-05.png" alt=""/></div><div class="outro-overlay"></div><div class="scene-content outro-copy"><div><p id="outro-kicker" class="kicker">FIVE LOOKS / ONE JOURNEY</p><h2 id="outro-title" class="title">여행지에서도,<br>쓰임이 먼저.</h2><p id="outro-lede" class="lede">다섯 벌이 아니라, 장면마다 역할을 바꾸는 몇 가지 기본.</p></div></div><div id="route-outro" class="route"></div></section>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused:true });
+      const sceneStarts = [0,5,11,17,23,29,35];
+      const sceneIds = ["intro","look01","look02","look03","look04","look05","outro"];
+      sceneIds.forEach((id, i) => {
+        const t = sceneStarts[i] + .18;
+        const photo = document.getElementById(id + "-photo");
+        const kicker = document.getElementById(id + "-kicker");
+        const title = document.getElementById(id + "-title");
+        const copy = document.getElementById(id + "-copy") || document.getElementById(id + "-lede");
+        const routeId = id === "intro" ? "route-intro" : id === "outro" ? "route-outro" : "route-" + id.replace("look", "");
+        const route = document.getElementById(routeId);
+        if (photo) tl.from(photo, { opacity:0, scale:1.035, duration:.8, ease:"power2.out" }, t);
+        if (kicker) tl.from(kicker, { opacity:0, y:18, duration:.46, ease:"sine.out" }, t + .16);
+        if (title) tl.from(title, { opacity:0, y:32, duration:.68, ease:"power3.out" }, t + .36);
+        if (copy) tl.from(copy, { opacity:0, y:14, duration:.5, ease:"expo.out" }, t + .68);
+        if (route) tl.from(route, { scaleX:0, duration:.78, ease:"power1.inOut" }, t + .10);
+      });
+      tl.from("#outro .outro-grid img", { opacity:0, y:24, duration:.7, stagger:.11, ease:"power2.out" }, 35.18);
+      tl.to("#outro", { opacity:0, duration:.8, ease:"sine.in" }, 44.2);
+      window.__timelines["magma-resort"] = tl;
+    </script>
+  </body>
+</html>

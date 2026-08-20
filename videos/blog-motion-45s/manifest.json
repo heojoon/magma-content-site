@@ -1,0 +1,11 @@
+{
+  "bundle": "magma-summer-resort-top5-motion",
+  "version": "1.0.0",
+  "design_system": {"registry_id": 4, "title": "MAGMA Brand Design System", "version": "1.0.0"},
+  "master": {"path": "renders/final.mp4", "duration_seconds": 45, "width": 1920, "height": 1080, "fps": 30, "video_codec": "h264", "audio_codec": "aac", "sha256": "d51854865d9838d0e55c99e07f4b385be18284353876fb683e4cbf9c9a14cdb3"},
+  "web_hero": {"path": "../../public/hero.mp4", "duration_seconds": 12, "width": 1920, "height": 1080, "fps": 30, "video_codec": "h264", "audio_tracks": 0, "captions": false, "logo": false, "sha256": "2043ed2c7cc143fca0950f8efe641c4f1018c912af4c5e916a8c2908b7136712"},
+  "inputs": {"article": "../../content/posts/summer-resort-top5.md", "approved_images": 6},
+  "integration": {"file": "../../site.config.ts", "change": "hero.video = /hero.mp4", "hero_media_modified": false},
+  "quality": {"hyperframes_check": "passed", "site_build": "passed", "revision_count": 0, "revision_limit": 2},
+  "secret_scan": {"status": "passed", "result": "No credential values or absolute paths included"}
+}

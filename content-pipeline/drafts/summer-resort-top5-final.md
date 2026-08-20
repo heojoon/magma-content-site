@@ -1,15 +1,15 @@
 ---
 slug: summer-resort-top5
-title: "2026 여름 휴양지 남성 패션: 여행 동선을 잇는 다섯 코디"
+title: '2026 여름 휴양지 남성 패션: 여행 동선을 잇는 다섯 코디'
 draft: false
-thumbnail: "/images/summer-resort-top5-thumbnail.png"
+thumbnail: /images/summer-resort-top5-thumbnail.png
 images:
-  - "/images/summer-resort-top5-look-01.png"
-  - "/images/summer-resort-top5-look-02.png"
-  - "/images/summer-resort-top5-look-03.png"
-  - "/images/summer-resort-top5-look-04.png"
-  - "/images/summer-resort-top5-look-05.png"
-meta_description: "출발부터 저녁 식사, 귀가까지. 여름 여행의 장면을 잇는 남성 패션 다섯 코디와 조합 기준을 정리합니다."
+  - /images/summer-resort-top5-look-01.png
+  - /images/summer-resort-top5-look-02.png
+  - /images/summer-resort-top5-look-03.png
+  - /images/summer-resort-top5-look-04.png
+  - /images/summer-resort-top5-look-05.png
+meta_description: '출발부터 저녁 식사, 귀가까지. 여름 여행의 장면을 잇는 남성 패션 다섯 코디와 조합 기준을 정리합니다.'
 ---
 
 # 2026 여름 휴양지 남성 패션: 여행 동선을 잇는 다섯 코디

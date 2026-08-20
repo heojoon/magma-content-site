@@ -1,5 +1,4 @@
 import { chromium } from 'playwright';
-import path from 'node:path';
 
 const browser = await chromium.launch({ headless: true });
 try {
@@ -7,7 +6,8 @@ try {
     viewport: { width: 1440, height: 1100 },
     deviceScaleFactor: 1,
   });
-  const reviewFile = 'http://127.0.0.1:4173/content-pipeline/reviews/summer-resort-top5-review.html';
+  const reviewOrigin = process.env.REVIEW_ORIGIN ?? 'http://127.0.0.1:4173';
+  const reviewFile = `${reviewOrigin}/content-pipeline/reviews/summer-resort-top5-review.html`;
   await page.goto(reviewFile, { waitUntil: 'load' });
   await page.waitForTimeout(2_000);
 
